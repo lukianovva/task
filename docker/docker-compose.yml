@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  ligatest-php-fpm:
+    container_name: ligatest-php-fpm
+    build:
+      context: ./php-fpm
+      dockerfile: Dockerfile
+      args:
+        - PUID=1000
+        - PGID=1000
+    volumes:
+      - ../:/var/www
+
+  ligatest-node:
+    container_name: ligatest-node
+    build:
+      context: ./nodejs
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../vue/task:/var/www
